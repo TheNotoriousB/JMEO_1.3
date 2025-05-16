@@ -1,0 +1,19 @@
+{
+    "name": "Docker_MB-JMEOS",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "settings": { 
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "forwardPorts": [ 3000 ],
+    "remoteUser": "root",
+    "postCreateCommand": "java -version",
+    "postCreateCommand": "mvn -version",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/usr/local/jmeos,type=bind,consistency=cached",
+    "workspaceFolder": "/usr/local/jmeos",
+    "runArgs": [
+        "--env", "MAVEN_HOME=/usr/share/maven",
+        "--env", "MAVEN_CONFIG=/root/.m2"]
+}
+

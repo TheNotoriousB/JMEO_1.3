@@ -2,6 +2,7 @@ package types.basic.tpoint;
 
 import jnr.ffi.Memory;
 import jnr.ffi.Pointer;
+import jnr.ffi.byref.IntByReference;
 import jnr.ffi.Runtime;
 import jnr.ffi.annotations.In;
 import types.TemporalObject;
@@ -139,7 +140,12 @@ public interface TPoint extends Serializable {
 	 * @return An {@link STBox} representing the bounding box.
 	 */
 	default STBox bounding_box_point(){
-		return new STBox(functions.tgeo_stboxes(getPointInner(),1));
+		// Create a JNR-FFI runtime instance
+		Runtime runtime = Runtime.getSystemRuntime();
+		// Allocate memory for an integer (4 bytes) but do not set a value
+		Pointer intPointer = Memory.allocate(Runtime.getRuntime(runtime), 4);
+		intPointer.putInt(0,1);
+		return new STBox(functions.tgeo_stboxes(getPointInner(),intPointer));
 	}
 
 /**

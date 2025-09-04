@@ -75,7 +75,12 @@ public class STBox implements Box {
 		if(allow_space_only && other instanceof Geometry){
 			other_box = new STBox(functions.geo_stbox(ConversionUtils.geo_to_gserialized((Geometry) other, this.geodetic())));
 		} else if (other instanceof TPoint) {
-			other_box = new STBox(functions.tgeo_stboxes(((TPoint)other).getPointInner(),1));
+			// Create a JNR-FFI runtime instance
+			Runtime runtime = Runtime.getSystemRuntime();
+			// Allocate memory for an integer (4 bytes) but do not set a value
+			Pointer intPointer = Memory.allocate(Runtime.getRuntime(runtime), 4);
+			intPointer.putInt(0,1);
+			other_box = new STBox(functions.tgeo_stboxes(((TPoint)other).getPointInner(),intPointer));
 		} else if (allow_time_only) {
 			switch (other) {
 				case STBox st -> other_box = new STBox(st.get_inner());
@@ -339,7 +344,11 @@ public class STBox implements Box {
 	 * @return A new {@link STBox} instance.
 	 */
     public static STBox from_tpoint(TPoint temporal){
-        return new STBox(functions.tgeo_stboxes(temporal.getPointInner(),1));
+		Runtime runtime = Runtime.getSystemRuntime();
+		// Allocate memory for an integer (4 bytes) but do not set a value
+		Pointer intPointer = Memory.allocate(Runtime.getRuntime(runtime), 4);
+		intPointer.putInt(0,1);
+        return new STBox(functions.tgeo_stboxes(temporal.getPointInner(),intPointer));
     }
 
 

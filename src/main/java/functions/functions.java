@@ -4334,6 +4334,36 @@ public class functions {
 
 		Pointer tnumber_value_time_split(Pointer temp, long size, Pointer duration, long vorigin, long torigin, Pointer value_bins, Pointer time_bins, Pointer count);
 
+		int date_in(String str);
+
+		String date_out(int d);
+
+		int interval_cmp(Pointer interv1, Pointer interv2);
+
+		Pointer interval_in(String str, int typmod);
+
+		Pointer interval_make(int years, int months, int weeks, int days, int hours, int mins, double secs);
+
+		String interval_out(Pointer interv);
+
+		double pg_exp(double arg1);
+
+		double pg_ln(double arg1);
+
+		double pg_log10(double arg1);
+
+		long time_in(String str, int typmod);
+
+		String time_out(long t);
+
+		long timestamp_in(String str, int typmod);
+
+		String timestamp_out(long t);
+
+		long timestamptz_in(String str, int typmod);
+
+		String timestamptz_out(long t);
+
 	}
 
 	@SuppressWarnings("unused")
@@ -13419,7 +13449,17 @@ public class functions {
 	public static Pointer intersection_value_spanset(long value, Pointer ss) {
 		return MeosLibrary.meos.intersection_value_spanset(value, ss);
 	}
-	
+	/** 
+	@SuppressWarnings("unused")
+	public static int mi_span_span(Pointer s1, Pointer s2) {
+		boolean out;
+		Runtime runtime = Runtime.getSystemRuntime();
+		Pointer result = Memory.allocateDirect(runtime, Long.BYTES);
+		out = MeosLibrary.meos.mi_span_span(s1, s2, result);
+		Pointer new_result = result.getPointer(0);
+		return out ? new_result : null ;
+	}
+	*/
 	@SuppressWarnings("unused")
 	public static Pointer minus_set_value(Pointer s, long value) {
 		return MeosLibrary.meos.minus_set_value(s, value);
@@ -15575,5 +15615,85 @@ public class functions {
 	public static Pointer tnumber_value_time_split(Pointer temp, long size, Pointer duration, long vorigin, OffsetDateTime torigin, Pointer value_bins, Pointer time_bins, Pointer count) {
 		var torigin_new = torigin.toEpochSecond();
 		return MeosLibrary.meos.tnumber_value_time_split(temp, size, duration, vorigin, torigin_new, value_bins, time_bins, count);
+	}
+	
+	@SuppressWarnings("unused")
+	public static int date_in(String str) {
+		return MeosLibrary.meos.date_in(str);
+	}
+	
+	@SuppressWarnings("unused")
+	public static String date_out(int d) {
+		return MeosLibrary.meos.date_out(d);
+	}
+	
+	@SuppressWarnings("unused")
+	public static int interval_cmp(Pointer interv1, Pointer interv2) {
+		return MeosLibrary.meos.interval_cmp(interv1, interv2);
+	}
+	
+	@SuppressWarnings("unused")
+	public static Pointer interval_in(String str, int typmod) {
+		return MeosLibrary.meos.interval_in(str, typmod);
+	}
+	
+	@SuppressWarnings("unused")
+	public static Pointer interval_make(int years, int months, int weeks, int days, int hours, int mins, double secs) {
+		return MeosLibrary.meos.interval_make(years, months, weeks, days, hours, mins, secs);
+	}
+	
+	@SuppressWarnings("unused")
+	public static String interval_out(Pointer interv) {
+		return MeosLibrary.meos.interval_out(interv);
+	}
+	
+	@SuppressWarnings("unused")
+	public static double pg_exp(double arg1) {
+		return MeosLibrary.meos.pg_exp(arg1);
+	}
+	
+	@SuppressWarnings("unused")
+	public static double pg_ln(double arg1) {
+		return MeosLibrary.meos.pg_ln(arg1);
+	}
+	
+	@SuppressWarnings("unused")
+	public static double pg_log10(double arg1) {
+		return MeosLibrary.meos.pg_log10(arg1);
+	}
+	
+	@SuppressWarnings("unused")
+	public static long time_in(String str, int typmod) {
+		return MeosLibrary.meos.time_in(str, typmod);
+	}
+	
+	@SuppressWarnings("unused")
+	public static String time_out(long t) {
+		return MeosLibrary.meos.time_out(t);
+	}
+	
+	@SuppressWarnings("unused")
+	public static LocalDateTime timestamp_in(String str, int typmod) {
+		var result = MeosLibrary.meos.timestamp_in(str, typmod);
+		return LocalDateTime.ofEpochSecond(result, 0, ZoneOffset.UTC);
+	}
+	
+	@SuppressWarnings("unused")
+	public static String timestamp_out(LocalDateTime t) {
+		var t_new = t.toEpochSecond(ZoneOffset.UTC);
+		return MeosLibrary.meos.timestamp_out(t_new);
+	}
+	
+	@SuppressWarnings("unused")
+	public static OffsetDateTime timestamptz_in(String str, int typmod) {
+		var result = MeosLibrary.meos.timestamptz_in(str, typmod);
+		Instant instant = Instant.ofEpochSecond(result);
+		return OffsetDateTime.ofInstant(instant, ZoneOffset.UTC);
+	}
+	
+	@SuppressWarnings("unused")
+	public static String timestamptz_out(OffsetDateTime t) {
+		var t_new = t.toEpochSecond();
+		return MeosLibrary.meos.timestamptz_out(t_new);
 	}
 }

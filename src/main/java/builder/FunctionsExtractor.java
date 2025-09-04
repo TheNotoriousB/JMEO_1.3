@@ -42,7 +42,7 @@ public class FunctionsExtractor {
             "src/main/java/builder/resources/meos_geo.h",
 			"src/main/java/builder/resources/pg_types.h",
 			"src/main/java/builder/resources/meos_internal.h",
-			"src/main/java/builder/resources/postgres_ext_defs.inn.h"
+			"src/main/java/builder/resources/postgres_ext_defs.in.h"
         };
 		for (String file : files) {
             inputFilePaths.add(Paths.get(currentDir, file));

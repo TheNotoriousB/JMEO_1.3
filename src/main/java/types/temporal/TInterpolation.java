@@ -33,6 +33,7 @@ public enum TInterpolation {
             case 3: 
                 return "Linear";
         }
+        return "None";
     }
 
     public static TInterpolation fromString(String source){

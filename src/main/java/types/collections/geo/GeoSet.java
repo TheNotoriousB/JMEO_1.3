@@ -67,7 +67,7 @@ public abstract class GeoSet extends Set<Geometry> {
      */
     public String toString(){
         int max_decimals = 15;
-        return functions.geoset_out(this._inner,max_decimals);
+        return functions.spatialset_as_text(this._inner,max_decimals);
     }
 
 
@@ -284,7 +284,7 @@ public abstract class GeoSet extends Set<Geometry> {
      * @return A new {@link GeoSet} object of the same subtype of "this".
      */
     public GeoSet round(int decimals, String type){
-        return factory(type, functions.spatialset_round(this._inner,decimals));
+        return factory(type, functions.set_round(this._inner,decimals));
     }
 
 

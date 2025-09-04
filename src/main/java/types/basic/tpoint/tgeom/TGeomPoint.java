@@ -103,7 +103,7 @@ public interface TGeomPoint extends TPoint {
 	 * @return A new {@link TGeogPoint} object.
 	 */
 	default TGeogPoint to_geographic(){
-		return (TGeogPoint) Factory.create_temporal(functions.tgeompoint_tgeogpoint(getPointInner()),getCustomType(),getTemporalType());
+		return (TGeogPoint) Factory.create_temporal(functions.tgeometry_tgeography(getPointInner()),getCustomType(),getTemporalType());
 
 	}
 

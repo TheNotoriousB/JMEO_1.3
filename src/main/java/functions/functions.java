@@ -13421,16 +13421,6 @@ public class functions {
 	}
 	
 	@SuppressWarnings("unused")
-	public static int mi_span_span(Pointer s1, Pointer s2) {
-		boolean out;
-		Runtime runtime = Runtime.getSystemRuntime();
-		Pointer result = Memory.allocateDirect(runtime, Long.BYTES);
-		out = MeosLibrary.meos.mi_span_span(s1, s2, result);
-		Pointer new_result = result.getPointer(0);
-		return out ? new_result : null ;
-	}
-	
-	@SuppressWarnings("unused")
 	public static Pointer minus_set_value(Pointer s, long value) {
 		return MeosLibrary.meos.minus_set_value(s, value);
 	}

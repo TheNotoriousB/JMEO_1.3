@@ -67,7 +67,7 @@ public class ConversionUtils {
 		int hours = (int)td.toHours();
 		int minutes = (int)td.toMinutes();
 		double seconds = (double)td.toSeconds();
-		return functions.pg_interval_make(years,month,weeks,days,hours,minutes,seconds);
+		return functions.interval_make(years,month,weeks,days,hours,minutes,seconds);
 	}
 
 	public static Duration interval_to_timedelta(Pointer p){
@@ -158,7 +158,7 @@ public class ConversionUtils {
 		if (geom.getSRID() > 0){
 			text = "SRID="+geom.getSRID()+";"+text;
 		}
-		Pointer ptr = functions.pgis_geometry_in(text,-1);
+		Pointer ptr = functions.geom_in(text,-1);
 		return ptr;
 	}
 
@@ -169,7 +169,7 @@ public class ConversionUtils {
 		if (geom.getSRID() > 0){
 			text = "SRID="+geom.getSRID()+";"+text;
 		}
-		Pointer ptr = functions.pgis_geography_in(text,-1);
+		Pointer ptr = functions.geog_in(text,-1);
 		return ptr;
 	}
 

@@ -530,7 +530,7 @@ public interface TPoint extends Serializable {
 	 * @return A new {@link TPoint} object.
 	 */
 	default TPoint round(int max_decimals){
-		return (TPoint) Factory.create_temporal(functions.tpoint_round(getPointInner(),max_decimals),getCustomType(),getTemporalType());
+		return (TPoint) Factory.create_temporal(functions.temporal_round(getPointInner(),max_decimals),getCustomType(),getTemporalType());
 	}
 
     /**
@@ -587,6 +587,8 @@ public interface TPoint extends Serializable {
          MEOS Functions:
             tpoint_transform
 	 */
+
+	/** 
     Map<AbstractMap.SimpleEntry<Integer, Integer>, Pointer> projectionCache = new HashMap<>();
 	 default TPoint transform(int srid){
 		 AbstractMap.SimpleEntry<Integer, Integer> srids = new AbstractMap.SimpleEntry<>(this.srid(), srid);
@@ -600,7 +602,7 @@ public interface TPoint extends Serializable {
 		 // Create and return a new TPoint instance
 		 return (TPoint) Factory.create_temporal(result, getCustomType(), getTemporalType());
 	 }
-
+	*/
     /* ------------------------- Restrictions ---------------------------------- */
 
 
@@ -1279,10 +1281,10 @@ public interface TPoint extends Serializable {
 		}
         else{
 			if(isTGeogPoint){
-				gs= functions.pgis_geography_in("Point (0 0 0)", -1);
+				gs= functions.geog_in("Point (0 0 0)", -1);
 			}
 			else{
-				gs= functions.pgis_geometry_in("Point (0 0 0)", -1);
+				gs= functions.geom_in("Point (0 0 0)", -1);
 			}
 		}
 		// Create a JNR-FFI runtime instance
@@ -1340,10 +1342,10 @@ public interface TPoint extends Serializable {
 		}
 		else{
 			if(isTGeogPoint){
-				gs= functions.pgis_geography_in("Point (0 0 0)", -1);
+				gs= functions.geog_in("Point (0 0 0)", -1);
 			}
 			else{
-				gs= functions.pgis_geometry_in("Point (0 0 0)", -1);
+				gs= functions.geom_in("Point (0 0 0)", -1);
 			}
 		}
 

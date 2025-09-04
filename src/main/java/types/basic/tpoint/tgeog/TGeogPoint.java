@@ -125,7 +125,7 @@ public interface TGeogPoint extends TPoint {
 	 * @return A new {@link TGeomPoint} object.
 	 */
 	default TGeomPoint to_geometric(){
-		return (TGeomPoint) Factory.create_temporal(functions.tgeogpoint_tgeompoint(getPointInner()),"Geom",getTemporalType());
+		return (TGeomPoint) Factory.create_temporal(functions.tgeography_tgeometry(getPointInner()),"Geom",getTemporalType());
 
 	}
 

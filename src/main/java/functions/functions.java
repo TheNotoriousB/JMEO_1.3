@@ -32,7 +32,7 @@ public class functions {
 
 		void meos_initialize_timezone(String name);
 
-		void meos_initialize_error_handler(Pointer err_handler);
+		void meos_initialize_error_handler(error_handler_fn err_handler);
 
 		void meos_finalize_timezone();
 
@@ -4397,7 +4397,7 @@ public class functions {
 	}
 	
 	@SuppressWarnings("unused")
-	public static void meos_initialize_error_handler(Pointer err_handler) {
+	public static void meos_initialize_error_handler(error_handler_fn err_handler) {
 		MeosLibrary.meos.meos_initialize_error_handler(err_handler);
 	}
 	

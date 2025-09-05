@@ -203,10 +203,8 @@ public class FunctionsGenerator {
 		types.put("Datum", "long");
 		types.put("uintptr_t", "long");
 
-		types.put("OffsetDateTime", "OffsetDateTime"); // if using java.time.*
+		types.put("OffsetDateTime", "OffsetDateTime"); 
 		types.put("LocalDateTime", "LocalDateTime");
-
-		types.put("error_handler_fn", "Pointer"); // or skip
 
 		
 		return types;
